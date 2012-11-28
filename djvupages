@@ -3,6 +3,7 @@
 if [ "$1" == "-h" ]
 then
 	echo "$0 <infile> <outfile> <page1> <page2> ..."
+	exit
 fi
 
 tmpdir=".djvu-extract"
