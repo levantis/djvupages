@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ "$1" == "-h" ]
+then
+	echo "$0 <infile> <outfile> <page1> <page2> ..."
+fi
+
+tmpdir=".djvu-extract"
+
+infilename="$1"
+shift
+outfilename="$1"
+shift
+pages="$@"
+
+mkdir $tmpdir
+
+for i in $pages;
+do
+	echo "select $i"
+	echo "save-page-with $tmpdir/$i"
+done | djvused "$infilename"
+
+djvm -c "$outfilename" $tmpdir/*
+
+rm -r $tmpdir
